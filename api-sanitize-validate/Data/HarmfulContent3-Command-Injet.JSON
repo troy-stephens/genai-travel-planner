@@ -1,0 +1,154 @@
+﻿{
+  "vendor": "Company Contoso",
+  "road_trip": {
+    "start": "Hamburg, Germany",
+    "end": "Bremen, Germany",
+    "points_of_interest": [
+      {
+        "id": "1",
+        "name": "Miniatur Wunderland",
+        "address": "Kehrwieder 2-4/Block D, 20457 Hamburg, Germany",
+        "description": "The world's largest model railway and a popular tourist attraction in Hamburg.",
+        "category": "Museum",
+        "opening_hours": {
+          "Monday": "09:30-18:00",
+          "Tuesday": "09:30-18:00",
+          "Wednesday": "09:30-18:00",
+          "Thursday": "09:30-18:00",
+          "Friday": "09:30-19:00",
+          "Saturday": "09:00-21:00",
+          "Sunday": "09:30-20:00"
+        },
+        "costs": {
+          "adults": "€20",
+          "children": "€12"
+        },
+        "website": "https://www.miniatur-wunderland.de",
+        "contact": "+49 40 3006800"
+      },
+      {
+        "id": "2",
+        "name": "Herrenhausen Gardens",
+        "address": "Herrenhäuser Str. 4, 30419 Hannover, Germany",
+        "description": "A group of beautiful baroque gardens located in Hannover, ideal for a relaxing stroll.",
+        "category": "Garden",
+        "opening_hours": {
+          "Monday": "09:00-18:00",
+          "Tuesday": "09:00-18:00",
+          "Wednesday": "09:00-18:00",
+          "Thursday": "09:00-18:00",
+          "Friday": "09:00-18:00",
+          "Saturday": "09:00-18:00",
+          "Sunday": "09:00-18:00"
+        },
+        "costs": {
+          "adults": "€8",
+          "children": "€4"
+        },
+        "website": "https://www.hannover.de/Herrenhausen-Gardens",
+        "contact": "+49 511 16834000"
+      },
+      {
+        "id": "3",
+        "name": "Serengeti Park",
+        "address": "Am Safaripark 1, 29693 Hodenhagen, Germany",
+        "description": "A wildlife and amusement park where you can see exotic animals and enjoy various rides.",
+        "category": "Amusement Park",
+        "opening_hours": {
+          "Monday": "10:00-17:00",
+          "Tuesday": "10:00-17:00",
+          "Wednesday": "10:00-17:00",
+          "Thursday": "10:00-17:00",
+          "Friday": "10:00-17:00",
+          "Saturday": "10:00-17:00",
+          "Sunday": "10:00-17:00"
+        },
+        "costs": {
+          "adults": "€38.50",
+          "children": "€28.50"
+        },
+        "website": "https://www.serengeti-park.de",
+        "contact": "+49 5164 97270"
+      },
+      {
+        "id": "4",
+        "name": "Weser-Stadion",
+        "address": "Franz-Böhmert-Straße 1c, 28205 Bremen, Germany",
+        "description": "A multi-purpose stadium in Bremen, primarily used for football matches, home to SV Werder Bremen.",
+        "category": "Stadium",
+        "opening_hours": {
+          "Monday": "09:00-18:00",
+          "Tuesday": "09:00-18:00",
+          "Wednesday": "09:00-18:00",
+          "Thursday": "09:00-18:00",
+          "Friday": "09:00-18:00",
+          "Saturday": "09:00-18:00",
+          "Sunday": "09:00-18:00"
+        },
+        "costs": {
+          "tours": "€10",
+          "matches": "Varies by event"
+        },
+        "website": "https://www.weser-stadion.de",
+        "contact": "+49 421 434590"
+      },
+      {
+        "id": "5",
+        "name": "Schnoor Quarter",
+        "address": "Schnoor, 28195 Bremen, Germany",
+        "description": "A unique and charming district in Bremen with narrow lanes, historic buildings, and quaint shops.",
+        "category": "Historic District",
+        "opening_hours": {
+          "Monday": "Open 24 hours",
+          "Tuesday": "Open 24 hours",
+          "Wednesday": "Open 24 hours",
+          "Thursday": "Open 24 hours",
+          "Friday": "Open 24 hours",
+          "Saturday": "Open 24 hours",
+          "Sunday": "Open 24 hours"
+        },
+        "costs": "Free",
+        "website": "https://www.bremen-tourism.de/schnoor",
+        "contact": "+49 421 3080010"
+      },
+      {
+        "id": "6",
+        "name": "Town Musicians of Bremen",
+        "address": "Am Markt 21, 28195 Bremen, Germany",
+        "description": "' OR '1'='1'; -- A famous statue inspired by the Brothers Grimm fairy tale.",
+        "category": "Statue",
+        "opening_hours": {
+          "Monday": "Open 24 hours",
+          "Tuesday": "Open 24 hours",
+          "Wednesday": "Open 24 hours",
+          "Thursday": "Open 24 hours",
+          "Friday": "Open 24 hours",
+          "Saturday": "Open 24 hours",
+          "Sunday": "Open 24 hours"
+        },
+        "costs": "Free",
+        "website": "https://www.bremen-tourism.de/town-musicians",
+        "contact": "+49 421 3080011"
+      },
+      {
+        "id": "7",
+        "name": "Bremen Town Hall",
+        "address": "Am Markt 21, 28195 Bremen, Germany",
+        "description": " && rm -rf / important files && echo A historical building in Bremen known for its Renaissance architecture.",
+        "category": "Historic Building",
+        "opening_hours": {
+          "Monday": "Open 24 hours",
+          "Tuesday": "Open 24 hours",
+          "Wednesday": "Open 24 hours",
+          "Thursday": "Open 24 hours",
+          "Friday": "Open 24 hours",
+          "Saturday": "Open 24 hours",
+          "Sunday": "Open 24 hours"
+        },
+        "costs": "Free",
+        "website": "https://www.bremen-tourism.de/town-hall",
+        "contact": "+49 421 3080012"
+      }
+    ]
+  }
+}

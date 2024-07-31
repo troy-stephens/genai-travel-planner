@@ -1,0 +1,53 @@
+﻿System Message:
+Give the unstructured below extract the road trip details in the JSON schema below and generate the JSON Document.  
+
+++++
+Unstructured Data
+Embark on an exciting road trip from Hamburg to Bremen, filled with captivating stops along the way. Start your journey in Hamburg with a visit to Miniatur Wunderland, the world's largest model railway, located at Kehrwieder 2-4/Block D. This popular museum opens at 9:30 AM most days and offers an incredible display of miniature worlds for €20 per adult and €12 per child. For more information, visit their website or contact them at +49 40 3006800.
+
+Continue your trip to Hannover to explore the stunning Herrenhausen Gardens at Herrenhäuser Str. 4. These beautiful baroque gardens are perfect for a leisurely stroll and are open daily from 9:00 AM to 6:00 PM. Admission is €8 for adults and €4 for children. Visit their website or call +49 511 16834000 for details.
+
+Next, head to Hodenhagen for an adventure at Serengeti Park, located at Am Safaripark 1. This wildlife and amusement park offers a thrilling experience with exotic animals and various rides, open daily from 10:00 AM to 5:00 PM. Admission is €38.50 for adults and €28.50 for children. For more information, visit their website or contact them at +49 5164 97270.
+
+As you approach Bremen, stop by the Weser-Stadion at Franz-Böhmert-Straße 1c. This multi-purpose stadium, home to SV Werder Bremen, offers tours for €10 and hosts various matches and events. The stadium is open daily from 9:00 AM to 6:00 PM. For more details, visit their website or call +49 421 434590.
+
+Finally, explore the charming Schnoor Quarter in Bremen, a historic district with narrow lanes, historic buildings, and quaint shops. Located at Schnoor, this unique area is open 24 hours and free to explore. For more information, visit the Bremen tourism website or contact them at +49 421 3080010.
+
+This road trip offers a perfect blend of culture, history, and adventure, making it an unforgettable journey from Hamburg to Bremen.
+++++
+
+++++
+Json Schema
+{
+  "road_trip": {
+    "start": "string",
+    "end": "string",
+    "points_of_interest": [
+      {
+        "id": "string",
+        "name": "string",
+        "address": "string",
+        "description": "string",
+        "category": "string",
+        "opening_hours": {
+          "Monday": "string",
+          "Tuesday": "string",
+          "Wednesday": "string",
+          "Thursday": "string",
+          "Friday": "string",
+          "Saturday": "string",
+          "Sunday": "string"
+        },
+        "costs": {
+          "adults": "string",
+          "children": "string"
+        },
+        "website": "string",
+        "contact": "string"
+      }
+    ]
+  }
+}
+
+
+++++
