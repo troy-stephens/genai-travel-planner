@@ -4,6 +4,7 @@ using api_roadtrip_input.Plugins;
 using api_roadtrip_input.Services;
 using api_roadtrip_input.Util;
 using Azure.Search.Documents.Indexes;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +18,11 @@ string _apiKey = Helper.GetEnvironmentVariable("ApiKey");
 string _apiAISearchEndpoint = Helper.GetEnvironmentVariable("AISearchURL");
 string _apiAISearchKey = Helper.GetEnvironmentVariable("AISearchKey");
 string _textEmbeddingName = Helper.GetEnvironmentVariable("EmbeddingName");
+
+string _cosmosDbConnectionString = Helper.GetEnvironmentVariable("CosmosDbConnectionString");
+string _cosmosDbName = Helper.GetEnvironmentVariable("CosmosDbName");
+string _cosmosUserContainer = Helper.GetEnvironmentVariable("CosmosUserRoadTripContainer");
+string _cosmosVendorContainer = Helper.GetEnvironmentVariable("CosmosVendorRoadTripContainer");
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
@@ -57,6 +63,20 @@ var host = new HostBuilder()
         services.AddSingleton<IChatCompletionService>(sp =>
                      sp.GetRequiredService<Kernel>().GetRequiredService<IChatCompletionService>());
         const string systemmsg = @$"You are an AI agent that can help with trip planning.";
+
+        // Configure CosmosClient using the connection string
+        CosmosClient cosmosClient = new CosmosClient(_cosmosDbConnectionString);
+        services.AddSingleton(cosmosClient);
+
+        // Register RoadTripRepository as a singleton
+        services.AddSingleton<IRoadTripRepository>(sp =>
+        {
+            var client = sp.GetRequiredService<CosmosClient>();
+            return new RoadTripRepositoryService(client, _cosmosDbName, _cosmosUserContainer, _cosmosVendorContainer);
+        });
+
+
+        services.AddSingleton<RoadTripRepositoryService>();
         services.AddSingleton<ChatHistory>(s =>
         {
             var chathistory = new ChatHistory();
