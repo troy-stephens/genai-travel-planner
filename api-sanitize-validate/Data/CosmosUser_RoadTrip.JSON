@@ -1,0 +1,35 @@
+﻿{
+  "id": "34fccb6d-195f-404e-89d3-f39b64925076",
+  "userid": "34fccb6d-195f-404e-89d3-f39b64925076",
+  "doctype": "roadtrip",
+  "roadtripid": "34fccb6d-195f-404e-89d3-f39b6492507x",
+  "road_trip": {
+    "name": "string",
+    "start": "string",
+    "end": "string",
+    "points_of_interest": [
+      {
+        "id": "string",
+        "name": "string",
+        "address": "string",
+        "description": "string",
+        "category": "string",
+        "opening_hours": {
+          "Monday": "string",
+          "Tuesday": "string",
+          "Wednesday": "string",
+          "Thursday": "string",
+          "Friday": "string",
+          "Saturday": "string",
+          "Sunday": "string"
+        },
+        "costs": {
+          "adults": "string",
+          "children": "string"
+        },
+        "website": "string",
+        "contact": "string"
+      }
+    ]
+  }
+}

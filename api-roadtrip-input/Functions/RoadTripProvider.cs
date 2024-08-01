@@ -1,4 +1,6 @@
+using api_roadtrip_input.Interfaces;
 using api_roadtrip_input.Models;
+using api_roadtrip_input.Services;
 using api_roadtrip_input.Util;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -16,16 +18,18 @@ namespace api_roadtrip_input.Functions
         private readonly ILogger<RoadTripProvider> _logger;
         private readonly Kernel _kernel;
         private bool _failedTokenLimit = false;
+        private readonly IRoadTripRepository _roadtripRepositoryService;
         private readonly IChatCompletionService _chat;
         private readonly ChatHistory _chatHistory;
         private readonly string _aiSearchIndex = Helper.GetEnvironmentVariable("AISearchIndex");
         private readonly string _semanticSearchConfigName = Helper.GetEnvironmentVariable("AISearchSemanticConfigName");
 
 
-        public RoadTripProvider(ILogger<RoadTripProvider> logger, Kernel kernel, IChatCompletionService chat, ChatHistory chatHistory)
+        public RoadTripProvider(ILogger<RoadTripProvider> logger, Kernel kernel, IRoadTripRepository roadtripRepo,  IChatCompletionService chat, ChatHistory chatHistory)
         {
             _logger = logger;
             _kernel = kernel;
+            _roadtripRepositoryService = roadtripRepo;
             _chat = chat;
             _chatHistory = chatHistory;
         }
