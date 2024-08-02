@@ -23,7 +23,7 @@ public class PointOfInterest
 {
     public string? Id { get; set; }
     public string? Name { get; set; }
-    public string? Address { get; set; }
+    public Address? Address { get; set; }
 
     public double? Latitude { get; set; }
 
@@ -35,6 +35,21 @@ public class PointOfInterest
     public Costs? Costs { get; set; }
     public string? Website { get; set; }
     public string? Contact { get; set; }
+}
+
+public class Address
+{
+    public string? HouseNumber { get; set; }
+    public string? Street { get; set; }
+    public string? City { get; set; }
+    public string? District { get; set; }
+    public string? State { get; set; }
+    public string? StateCode { get; set; }
+    public string? Country { get; set; }
+    public string? CountryCode { get; set; }
+    public string? AddressLabel { get; set; }
+    public string? PostalCode { get; set; }
+    public string? Locality { get; set; }
 }
 
 public class RoadTrip

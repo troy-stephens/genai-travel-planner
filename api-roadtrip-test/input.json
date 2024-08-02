@@ -9,11 +9,11 @@
         "End": "2023-03-05T12:00:00",
         "PointsOfInterest": [
             {
-                "Id": "1",
+                "Id": "input-1",
                 "Name": "Sinhagad Fort",
                 "Address": "",
-                "Latitude": 18.3667,
-                "Longitude": 73.7550,
+                "Latitude": 18.3,
+                "Longitude": 73.7,
                 "Description": "This is a description of POI 1",               
                 "Category": "attraction",
                 "OpeningHours": {
@@ -33,11 +33,11 @@
                 "Contact": "info@poi1.com"
             },
             {
-                "Id": "2",
+                "Id": "input-2",
                 "Name": "Karla Caves",
                 "Address": "",
-                "Latitude": 18.7714,
-                "Longitude": 73.4712,
+                "Latitude": 18.7,
+                "Longitude": 73.4,
                 "Description": "This is a description of POI 2",
                 "Category": "restaurant",
                 "OpeningHours": {

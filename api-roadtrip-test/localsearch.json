@@ -5,9 +5,9 @@
             "message": "Request was successful."
         },
         "diagnostics": {
-            "rootParentId": "4f949756-5c82-49e0-a39b-62f5f5ee9cde.3",
-            "sessionId": "4f949756-5c82-49e0-a39b-62f5f5ee9cde",
-            "traceId": "9a55b76268d13d8eefc87e3a63fea8e7"
+            "rootParentId": "b00a5585-7f98-4deb-a40f-79d6f951973b.3",
+            "sessionId": "b00a5585-7f98-4deb-a40f-79d6f951973b",
+            "traceId": "04d2655d195dc5afbf0077ea3ddb5dbc"
         }
     },
     "data": {
@@ -19,198 +19,93 @@
             ],
             "places": [
                 {
-                    "name": "Starbucks Coffee",
+                    "name": "Sinhagad fort",
                     "attributions": [
                         {
                             "id": "google_v1"
                         }
                     ],
-                    "placeType": "coffee_shop",
+                    "placeType": "hiking_area",
                     "location": {
                         "geoPosition": {
-                            "latitude": "51.508493",
-                            "longitude": "-0.079224"
+                            "latitude": "18.377198",
+                            "longitude": "73.767756"
                         },
                         "address": {
-                            "houseNumber": "3",
-                            "street": "Tower Place",
-                            "city": "London",
-                            "district": "Greater London",
-                            "state": "England",
-                            "stateCode": "England",
-                            "country": "United Kingdom",
-                            "countryCode": "GB",
-                            "addressLabel": "3 Tower Place, London EC3R 5BT, UK",
-                            "postalCode": "EC3R 5BT"
+                            "street": "Sinhagad Paytha Road",
+                            "city": "Aatekar Vasti",
+                            "district": "Pune Division",
+                            "state": "Maharashtra",
+                            "stateCode": "MH",
+                            "country": "India",
+                            "countryCode": "IN",
+                            "addressLabel": "9QG9+V4C, Sinhagad Paytha Road, Aatekar Vasti, Maharashtra 411025, India",
+                            "postalCode": "411025",
+                            "locality": "Aatekar Vasti"
                         }
                     },
                     "contacts": [
-                        {
-                            "type": "phone",
-                            "label": "phone",
-                            "value": "+44 20 7929 1755"
-                        }
+                        {}
                     ],
                     "distance": {
-                        "value": "0.36",
+                        "value": "7308.16",
                         "unit": "km",
                         "type": 6
                     },
                     "calculatedDistances": [
                         {
-                            "value": "0.36",
+                            "value": "7308.16",
                             "unit": "km",
                             "type": 6,
                             "center": "AT"
                         }
                     ],
-                    "calculatedBearing": 276,
+                    "calculatedBearing": 91,
                     "categories": [
                         {
-                            "token": "coffee_shop",
-                            "name": "coffee_shop",
-                            "canonical": "cafe"
+                            "token": "hiking_area",
+                            "name": "hiking_area"
                         },
                         {
-                            "token": "cafe",
-                            "name": "cafe",
-                            "canonical": "coffee_shop"
-                        },
-                        {
-                            "token": "meal_takeaway",
-                            "name": "meal_takeaway",
-                            "canonical": "meal_takeaway"
-                        },
-                        {
-                            "token": "sandwich_shop",
-                            "name": "sandwich_shop",
-                            "canonical": "sandwich_restaurant"
-                        },
-                        {
-                            "token": "restaurant",
-                            "name": "restaurant",
-                            "canonical": "restaurant"
+                            "token": "park",
+                            "name": "park",
+                            "canonical": "park"
                         },
                         {
                             "token": "point_of_interest",
                             "name": "point_of_interest"
                         },
                         {
-                            "token": "store",
-                            "name": "store",
-                            "canonical": "store"
-                        },
-                        {
-                            "token": "food",
-                            "name": "food",
-                            "canonical": "food"
-                        },
-                        {
                             "token": "establishment",
                             "name": "establishment"
                         }
                     ],
-                    "placeId": "ChIJMxz2sk0DdkgR15W2SByeqYY",
+                    "placeId": "ChIJb5z6H5eTwjsR6L9uTHZg7o4",
                     "accessPoints": [
                         {
                             "type": "northeast",
                             "geoPosition": {
-                                "latitude": "51.509785",
-                                "longitude": "-0.077952"
+                                "latitude": "18.378555",
+                                "longitude": "73.769092"
                             }
                         },
                         {
                             "type": "southwest",
                             "geoPosition": {
-                                "latitude": "51.507087",
-                                "longitude": "-0.08065"
+                                "latitude": "18.375857",
+                                "longitude": "73.766394"
                             }
                         }
                     ],
-                    "operatingHours": {
-                        "openNow": true,
-                        "summary": "Mon,Tue,Wed,Thu,Fri:07:00-21:00\nSat,Sun:08:00-21:00",
-                        "hours": [
-                            {
-                                "days": [
-                                    1,
-                                    2,
-                                    3,
-                                    4,
-                                    5
-                                ],
-                                "periods": [
-                                    {
-                                        "start": "07:00",
-                                        "end": "21:00"
-                                    }
-                                ]
-                            },
-                            {
-                                "days": [
-                                    6,
-                                    7
-                                ],
-                                "periods": [
-                                    {
-                                        "start": "08:00",
-                                        "end": "21:00"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
                     "details": {
                         "localsearchDetail": {
                             "rating": {
-                                "count": 1454,
-                                "average": 3.7,
+                                "count": 287,
+                                "average": 4.8,
                                 "max": null
                             },
-                            "price": "$$$",
-                            "restrooms": true,
-                            "takeoutAvailable": true,
                             "goodForKid": true,
-                            "goodForGroup": true,
-                            "deliverAvailable": true,
-                            "dineInAvailable": true,
-                            "servesCoffee": true,
-                            "servesDesserts": true,
-                            "servesDinner": true,
-                            "servesLunch": true,
-                            "servesVegetarianFood": true,
-                            "payments": [
-                                {
-                                    "mode": "DEBIT_CARD",
-                                    "isAvailable": true
-                                },
-                                {
-                                    "mode": "CREDIT_CARD",
-                                    "isAvailable": true
-                                },
-                                {
-                                    "mode": "NFC",
-                                    "isAvailable": true
-                                }
-                            ],
-                            "accessibilityOptions": {
-                                "wheelchairAccessibleEntrance": true,
-                                "wheelchairAccessibleRestroom": true,
-                                "wheelchairAccessibleSeating": true
-                            },
-                            "editorialSummary": {
-                                "text": "Seattle-based coffeehouse chain known for its signature roasts, light bites and WiFi availability.",
-                                "languageCode": "en"
-                            },
-                            "parkingOptions": {
-                                "freeParkingLot": false,
-                                "paidParkingLot": false,
-                                "freeStreetParking": false,
-                                "paidStreetParking": false,
-                                "valetParking": false,
-                                "freeGarageParking": false,
-                                "paidGarageParking": false
-                            }
+                            "accessibilityOptions": {}
                         }
                     }
                 }
