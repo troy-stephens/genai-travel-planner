@@ -1,0 +1,61 @@
+{
+    "Id": "123456",
+    "UserId": "user123",
+    "DocType": "roadtrip",
+    "RoadTripId": "roadtrip-abc",
+    "RoadTrip": {
+        "Name": "My Road Trip",
+        "Start": "2023-03-01T12:00:00",
+        "End": "2023-03-05T12:00:00",
+        "PointsOfInterest": [
+            {
+                "Id": "1",
+                "Name": "Sinhagad Fort",
+                "Address": "",
+                "Latitude": 18.3667,
+                "Longitude": 73.7550,
+                "Description": "This is a description of POI 1",               
+                "Category": "attraction",
+                "OpeningHours": {
+                    "Monday": "09:00-17:00",
+                    "Tuesday": "09:00-17:00",
+                    "Wednesday": "09:00-17:00",
+                    "Thursday": "09:00-17:00",
+                    "Friday": "09:00-17:00",
+                    "Saturday": "09:00-17:00",
+                    "Sunday": "09:00-17:00"
+                },
+                "Costs": {
+                    "Adults": "10.00",
+                    "Children": "5.00"
+                },
+                "Website": "https://www.poi1.com",
+                "Contact": "info@poi1.com"
+            },
+            {
+                "Id": "2",
+                "Name": "Karla Caves",
+                "Address": "",
+                "Latitude": 18.7714,
+                "Longitude": 73.4712,
+                "Description": "This is a description of POI 2",
+                "Category": "restaurant",
+                "OpeningHours": {
+                    "Monday": "11:00-22:00",
+                    "Tuesday": "11:00-22:00",
+                    "Wednesday": "11:00-22:00",
+                    "Thursday": "11:00-22:00",
+                    "Friday": "11:00-22:00",
+                    "Saturday": "11:00-22:00",
+                    "Sunday": "11:00-22:00"
+                },
+                "Costs": {
+                    "Adults": "20.00",
+                    "Children": "10.00"
+                },
+                "Website": "https://www.poi2.com",
+                "Contact": "info@poi2.com"
+            }
+        ]
+    }
+}
