@@ -37,7 +37,7 @@ namespace api_roadtrip_input.Functions
         [Function("roadtrip")]
         public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
         {
-            // Request body example:
+            // Response body example:
             /*
                 {
                     "status_message" : "Your request has exceeded the maximum token size for the API, please reduce the size of your payload!"
@@ -51,25 +51,30 @@ namespace api_roadtrip_input.Functions
             // Step # 1 - Implement Checks on the Data.
             // # 1 - Verify that the size of the payload does not exceed the max size limit we allow.
             // All these checks should be implemented in some sort of helper.
-            var _tokenlimit = 0;
-            int.TryParse(Helper.GetEnvironmentVariable("TokenLimit"), out _tokenlimit);
+            if(!int.TryParse(Helper.GetEnvironmentVariable("TokenLimit"), out int _tokenlimit))
+            {
+                throw new ArgumentNullException("Please check your environment variables, you are missing the TokenLimit value.");
+            }
+
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var tokencount = PayloadHelper.GetTokens(requestBody);
-
+            HttpStatusCode status;
             TokenLimitResponse tokenLimitResponse = new TokenLimitResponse();
             if (tokencount > _tokenlimit)   // max limit
             {
-                tokenLimitResponse.Passed_Token_Limit = false;
+                tokenLimitResponse.Exceeded_Token_Limit = true;
                 tokenLimitResponse.Status_Message = "Your request has exceeded the maximum token size for the API, please reduce the size of your payload!";
                 tokenLimitResponse.Token_Limit = _tokenlimit.ToString();
                 tokenLimitResponse.Token_Count = tokencount.ToString();
+                status = HttpStatusCode.BadRequest;
             }
             else
             {
-                tokenLimitResponse.Passed_Token_Limit = true;
-                tokenLimitResponse.Status_Message = "Your request is within the  maximum token size for the API, and is being processed.";
+                tokenLimitResponse.Exceeded_Token_Limit = false;
+                tokenLimitResponse.Status_Message = "Your request is within the maximum token size for the API, and is being processed.";
                 tokenLimitResponse.Token_Limit = _tokenlimit.ToString();
                 tokenLimitResponse.Token_Count = tokencount.ToString();
+                status = HttpStatusCode.OK;
             }
             // If the size check fails we need to return a 400 Invalid Request status code to Client along with the TokenLimitReponse in the Response Boday
            
@@ -78,8 +83,7 @@ namespace api_roadtrip_input.Functions
                 throw new ArgumentNullException("Please check your request body, you are missing required data.");
             }
 
-
-            HttpResponseData response = req.CreateResponse(HttpStatusCode.OK);
+            HttpResponseData response = req.CreateResponse(status);
             try
             {
                 await response.WriteAsJsonAsync<TokenLimitResponse>(tokenLimitResponse);

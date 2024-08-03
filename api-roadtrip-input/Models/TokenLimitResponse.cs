@@ -5,7 +5,7 @@ namespace api_roadtrip_input.Models;
 public class TokenLimitResponse
 {
     [JsonPropertyName("passed_token_limit")]
-    public bool? Passed_Token_Limit { get; set; }
+    public bool? Exceeded_Token_Limit { get; set; }
 
     [JsonPropertyName("status_message")]
     public string? Status_Message { get; set; }
