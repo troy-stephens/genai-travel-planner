@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<appSettings>
+		<add key="AzureMapsKey" value="your Azure Maps API key" />
+		<add key="AzureOpenAIEndpoint" value="your API endpoint" />
+		<add key="AzureOpenAIKey" value="your Azure OpenAI Key" />
+		<add key="AzureOpenAIModel" value="your model name" />
+		<add key="AzureSearchEndpoint" value="https://yoursearch-endpoint.search.windows.net" />
+		<add key="AzureSearchApiKey" value="your search API key" />
+		<add key="AzureSearchIndex" value="your search index" />
+		<add key="AzureSearchSemanticConfig" value="your semantic search config name" />
+	</appSettings>
+</configuration>
