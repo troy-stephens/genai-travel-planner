@@ -20,6 +20,12 @@ namespace api_chat.Util
             // Keep the ChatHistory local since we only need it to detect the Intent
             ChatHistory chatHistory = new ChatHistory();
             var whatistheintent = "not_travel"; // default
+            // RoutePlan - If the user wants you to build a route plan
+            //User: I like the Asheville recommendation can you create a route plan for it and use the Biltmore estate for lodging.
+            //Intent: RoutePlan
+            //User: Create a travel plan for the Charleston recommendation and use the The Dewberry Charleston for lodging.
+            //Intent: RoutePlan
+
             chatHistory.AddSystemMessage($@"Identify the user's intent. Return one of the following values:
 
             SuggestDestinations - If the user wants destination recommendations
@@ -27,7 +33,6 @@ namespace api_chat.Util
             Accommodations - If the user wants recommendations for accomodations
             KnownDestination - If the user knows the destination
             TellMeMore - If the user wants more information
-            RoutePlan - If the user wants you to build a route plan
             Unknown - If the user's intent matches none of the above
 
             Examples:
@@ -35,11 +40,6 @@ namespace api_chat.Util
             Intent: SuggestDestinations
             User: I want to go on vacation, but I’m not sure where to go. Can you suggest some destinations?
             Intent: SuggestDestinations
-
-            User: I like the Asheville recommendation can you create a route plan for it and use the Biltmore estate for lodging.
-            Intent: RoutePlan
-            User: Create a travel plan for the Charleston recommendation and use the The Dewberry Charleston for lodging.
-            Intent: RoutePlan
 
             Examples:
             User: Please suggest some activities, sites to see, places to visit that would make our trip more interesting

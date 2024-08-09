@@ -20,6 +20,7 @@ namespace api_chat.Util
         {
            'detailsProvided' : true,
            'startingPoint' : '<The city or address the user is starting from.>',
+           'destination' : '<The destination or location user is traveling to.>,
            'duration' : '<The duration of the trip in days, weeks or months>',
            'activities' : '<The activities the user is interested in>
         }";
@@ -111,9 +112,11 @@ namespace api_chat.Util
         private string _promptProvideRecommendationsForKnownDestination = @"
             Starting Point: {{$startingpoint}}
             Duration: {{$duration}}
+            Destination: {{$destination}}
             Activities: {{$activities}}
-            Based on the starting details, provide recommendations for the destination provided and 3 places for accommodations using the following format:
+            Based on the starting details [Starting Point], provide recommendations for the destination provided and 3 places for accommodations using the following format provided in the example below:
 
+            [Example]
             # Ashiville, North Carolina
             ## Estimated Drive Time: ~ 2 hours
             ## Activities:
@@ -127,7 +130,7 @@ namespace api_chat.Util
                -**Address:** address of the place
             3. **Townsend Gateway Inn:** details about the place
                -**Address:** address of the place
-
+            [End Example]
             **Summary:** short summary of the recommendations";
 
         private string _promptProvideRoutePlan = @"

@@ -13,10 +13,13 @@ namespace api_chat.Models
         public bool DetailsProvided { get; set; } = false;
 
         [JsonPropertyName("startingPoint")]
-        public string StartingPoint { get; set; } = string.Empty;
+        public string? StartingPoint { get; set; } = string.Empty;
+
+        [JsonPropertyName("destination")]
+        public string? Destination { get; set; } = string.Empty;
 
         [JsonPropertyName("duration")]
-        public string Duration { get; set; } = string.Empty;
+        public string? Duration { get; set; } = string.Empty;
 
         [JsonPropertyName("activities")]
         public string Activities { get; set; } = string.Empty;
