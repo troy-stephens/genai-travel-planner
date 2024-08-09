@@ -14,7 +14,7 @@ builder.Services.AddMudServices();
 // Configure HttpClient for the server-side Blazor app
 builder.Services.AddHttpClient("ChatAPI", client =>
 {
-    // for local API http://localhost:7129/api/
+    // for local API http://localhost:7129/api/ 
     // for azure deployment https://someapi.azurewebsites.net/api/ChatProvider?code=somecode%3D%3D
     client.BaseAddress = new Uri("http://localhost:7129/api/");
 });
