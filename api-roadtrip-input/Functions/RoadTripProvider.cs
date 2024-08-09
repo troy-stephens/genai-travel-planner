@@ -62,7 +62,7 @@ namespace api_roadtrip_input.Functions
             TokenLimitResponse tokenLimitResponse = new TokenLimitResponse();
             if (tokencount > _tokenlimit)   // max limit
             {
-                tokenLimitResponse.Passed_Token_Limit = true;
+                tokenLimitResponse.Exceeded_Token_Limit = true;
                 tokenLimitResponse.Status_Message = "Your request has exceeded the maximum token size for the API, please reduce the size of your payload!";
                 tokenLimitResponse.Token_Limit = _tokenlimit.ToString();
                 tokenLimitResponse.Token_Count = tokencount.ToString();
@@ -70,8 +70,8 @@ namespace api_roadtrip_input.Functions
             }
             else
             {
-                tokenLimitResponse.Passed_Token_Limit = false;
-                tokenLimitResponse.Status_Message = "Your request is within the  maximum token size for the API, and is being processed.";
+                tokenLimitResponse.Exceeded_Token_Limit = false;
+                tokenLimitResponse.Status_Message = "Your request is within the maximum token size for the API, and is being processed.";
                 tokenLimitResponse.Token_Limit = _tokenlimit.ToString();
                 tokenLimitResponse.Token_Count = tokencount.ToString();
                 status = HttpStatusCode.OK;

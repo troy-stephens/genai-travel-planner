@@ -1,0 +1,92 @@
+﻿@using ui_frontend.Utils.Helpers;
+@using ui_frontend.Models;
+@using ui_frontend.Service;
+@using Blazored.LocalStorage;
+@attribute [StreamRendering]
+@inject UserSessionService userSessionService
+@inject ILocalStorageService LocalStorage
+@inject IJSRuntime JSRuntime;
+@rendermode InteractiveServer
+<style>
+    .text-with-new-lines {
+        white-space: pre-wrap;
+    }
+
+</style>
+
+<MudStack>
+    <MudSpacer />
+    <MudStack>
+        <MudPaper Class="pa-4" Elevation="12" Style="margin-bottom:20px;margin-left:20vh;width: fit-content;">
+            <MudText Class="pa-4" Style="max-width: 1000px;font-style: normal;font-weight: 400;font-size: 14px;line-height: 20px;color: #323130;margin: 11px;white-space: normal;">               
+                <div style="white-space: pre-wrap;">
+                    <span style="white-space: pre-line">@StatusText</span>
+                </div>
+            </MudText>
+            <MudSpacer />
+            <MudText Class="pa-4" Style="font-style: normal;margin: 11px;font-weight: 400;font-size: 12px;line-height: 16px;color: #707070;">
+                @if (CitationList.Count > 0)
+                {
+                <MudText Style="font-style: normal;font-weight: 400;font-size: 12px;line-height: 16px;color: #707070;">
+                   Citations
+                </MudText>
+                    var i = 0;
+                    foreach (var itemcitation in CitationList)
+                    {
+                        i++;
+                        var filePath = itemcitation.FilePath ?? "";
+                        var title = itemcitation.Title;
+                        <div>
+                            <MudLink @onclick="(() => DoWork(filePath))" Style="font-style: normal;font-weight: 400;font-size: 12px;line-height: 16px;color: #707070;">@title</MudLink>
+                            @* <a @onclick="DoWorkAndRedirect" href="" target="blank">@title</a> *@
+                        </div>
+                    }
+                }
+                <br />
+                AI-generated content may be incorrect
+            </MudText>
+        </MudPaper>
+    </MudStack>
+</MudStack>
+@code {
+    [Parameter]
+    public string? StatusText { get; set; } 
+
+    [Parameter]
+    public List<Citation> CitationList { get; set; } = new List<Citation>();
+
+    private async Task DoWorkAndRedirect(MouseEventArgs e)
+    {
+        // Do your work here, and then...
+        try {
+            var test = await JSRuntime.InvokeAsync<object>("open", "./pdfviewer", "_blank");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message} - test" );
+        }
+    }
+
+    private async Task DoWork(string selectedCitation)
+    {
+        // Do your work here, and then...
+        // userSessionService.SelectedCitationUri = selectedCitation;
+        await LocalStorage.SetItemAsync("SharedSelectedCitation", selectedCitation);
+        try
+        {
+            await JSRuntime.InvokeVoidAsync("open", "./pdfviewer", "_blank");
+           // var test = await JSRuntime.InvokeAsync<object>("open", "./pdfviewer", "_blank");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{ex.Message} - test");
+        }
+    }
+
+    // Method to clear content
+    public void ClearContent()
+    {
+        StatusText = string.Empty;
+        StateHasChanged();
+    }
+}
