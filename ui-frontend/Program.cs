@@ -18,8 +18,16 @@ builder.Services.AddHttpClient("ChatAPI", client =>
     // for azure deployment https://someapi.azurewebsites.net/api/ChatProvider?code=somecode%3D%3D
     client.BaseAddress = new Uri("http://localhost:7129/api/");
 });
+builder.Services.AddHttpClient("SyncAPI", client =>
+{
+    // for local API http://localhost:7049/api/
+    // for azure deployment https://someapi.azurewebsites.net/api/travel-data
+    client.BaseAddress = new Uri("http://localhost:7049/api/");
+});
 
 builder.Services.AddScoped<ChatService>();
+builder.Services.AddScoped<SyncService>();
+builder.Services.AddScoped<ProgressService>();
 builder.Services.AddScoped<UserSessionService>();
 
 builder.Services.AddBlazoredLocalStorage();

@@ -14,9 +14,9 @@ namespace api_chat.Util
 {
     internal class SuggestDestinations
     {
-        private string _promptCheckForDetails = @"UserId: {{$userid}}
+        private const string _promptCheckForDetails = @"UserId: {{$userid}}
         Question: {{$query}}
-        Check the query to see if starting details were provide and populate the JSON structure below with the details:
+        Check the query to see if starting details were provided and populate the JSON structure below with the details:
         {
            'detailsProvided' : true,
            'startingPoint' : '<The city or address the user is starting from.>',
@@ -24,19 +24,19 @@ namespace api_chat.Util
            'activities' : '<The activities the user is interested in>
         }";
 
-        private string _promptAskForMoreDetails = @"UserId: {{$userid}}
-            Quesiton: {{$query}} 
+        private const string _promptAskForMoreDetails = @"UserId: {{$userid}}
+            Question: {{$query}} 
             Check the question for the following details.
             Starting Point:  If the user did not provide a Starting Point, ask for the starting point, it can be a city or address.
             Duration:   If the user did not provide the duration of the trip, ask for the duration i.e. 1 day 2 days etc.
-            Activities: If the user did not provide activities ask what activities are they instrested in i.e. outdoor activities, site seeing etc.
+            Activities: If the user did not provide activities ask what activities are they interested in i.e. outdoor activities, site seeing etc.
 
             Response:  Where will you be starting your trip from?  How long are you planning to travel?  What activities are you interested in?  
 
-            Example: 1200 Central Ave. Charlotte, NC 28204.  5 Days and I like sight seeting, hiking, fly fishing, mountain biking.";
+            Example: 1200 Central Ave. Charlotte, NC 28204.  5 Days and I like sight seeing, hiking, fly fishing, mountain biking.";
 
-        private string _promptExtractStartingDetails = @"Starting Details: {{$query}}
-            StartingPoint:  Extract the starting poing from the query,t can be a city or address.
+        private const string _promptExtractStartingDetails = @"Starting Details: {{$query}}
+            StartingPoint:  Extract the starting point from the query. it can be a city or address.
             Duration: Extract the duration of the trip, it can be in days, weeks or months.
             Activities: Extract their activities i.e. outdoor activities, site seeing etc.
             The response should be in the following JSON structure:
@@ -47,119 +47,379 @@ namespace api_chat.Util
               'Activities' : '<The activities the user is interested in>'
             }";
 
-        private string _promptSuggestDestinationDetails = @"Starting Details: {{$query}}
+        private const string _promptSuggestDestinationDetails = @"Starting Details: {{$query}}
             Based on the Starting Details, suggest the following:
             Suggest 5 Destinations, and activities for the trip and also include the estimated drive time from the starting point.
             The response should be in the following JSON structure:
 
-            {
-              'destinations': [
                 {
-                  'name': 'Asheville, North Carolina',
-                  'estimated_drive_time': '2 hours',
-                  'activities': {
-                    'mountain_biking': 'Ride the extensive trail network in Pisgah National Forest, including popular trails like Bent Creek and Dupont State Forest.',
-                    'hiking': 'Explore the Blue Ridge Parkway and Great Smoky Mountains National Park for numerous hiking options with stunning mountain views.',
-                    'fly_fishing': 'The Davidson River is a top fly fishing spot, known for its large population of trout.'
-                  }
-                },
+                    'message': 'short summary of the recommendation(s)'
+                    'destinations': 
+                    [
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                        },
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                        },
+                    ]
+                }";
+
+        private const string _promptSummarizeRecommendations = @"Starting Details: {{$query}}
+            Based on the starting details, provide recommendations for up to 5 destinations.
+            The response should be in the following JSON structure:
+
                 {
-                  'name': 'Boone, North Carolina',
-                  'estimated_drive_time': '2.5 hours',
-                  'activities': {
-                    'mountain_biking': 'Ride the trails at Rocky Knob Mountain Bike Park, designed for various skill levels.',
-                    'hiking': 'Hike along the Appalachian Trail or explore Grandfather Mountain for challenging trails and scenic vistas.',
-                    'fly_fishing': 'The Watauga River and nearby streams offer excellent fly fishing for trout.'
-                  }
-                }
-              ]
-            }";
+                    'message': 'short summary of the recommendation(s)'
+                    'destinations': 
+                    [
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                        },
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                        },
+                    ]
+                }";
 
-        private string _promptSummarizeRecommendations = @"Starting Details: {{$query}}
-            Based on the starting details, provide recommendations for up to 5 destinations using the following format:
+            //# Asheville, North Carolina
+            //## Estimated Drive Time: ~ 2 hours
+            //## Activities:
+            //- **Mountain Biking:** details about the mountain biking
+            //- **Hiking:** details about the hiking
+            //- **Fly Fishing:** details about the fly fishing
+            //**Summary:** short summary of the recommendations";
 
-            # Ashiville, North Carolina
-            ## Estimated Drive Time: ~ 2 hours
-            ## Activities:
-            - **Mountain Biking:** details about the mountain biking
-            - **Hiking:** details about the hiking
-            - **Fly Fishing:** details about the fly fishing
-            **Summary:** short summary of the recommendations";
-
-        private string _promptProvideRecommendations = @"
+        private const string _promptProvideRecommendations = @"
             Starting Point: {{$startingpoint}}
             Duration: {{$duration}}
             Activities: {{$activities}}
-            Based on the starting details, provide recommendations for up to 5 destinations and 3 places for accommodations using the following format:
+            Based on the starting details, provide recommendations for up to 5 destinations and 3 places for accommodations.
+            The response should be in the following JSON structure:
 
-            # Ashiville, North Carolina
-            ## Estimated Drive Time: ~ 2 hours
-            ## Activities:
-            - **Mountain Biking:** details about the mountain biking
-            - **Hiking:** details about the hiking
-            - **Fly Fishing:** details about the fly fishing
-            ## Accommodations:
-            1. **Blackberry Farm:** details about the place
-               -**Address:** address of the place
-            2. **The Lodge at Buckberry Creek:** details about the place
-               -**Address:** address of the place
-            3. **Townsend Gateway Inn:** details about the place
-               -**Address:** address of the place
+                {
+                    'message': 'short summary of the recommendation(s)'
+                    'destinations': 
+                    [
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                            'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
 
-            **Summary:** short summary of the recommendations";
+                        },
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                            'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
+                        },
+                    ]
+                }";
 
-        private string _promptProvideRecommendationsForKnownDestination = @"
+        private const string _promptProvideRecommendationsForKnownDestination = @"
             Starting Point: {{$startingpoint}}
+            Destination: {{$destination}}
             Duration: {{$duration}}
             Activities: {{$activities}}
-            Based on the starting details, provide recommendations for the destination provided and 3 places for accommodations using the following format:
+            Based on the starting details, provide recommendations for the destination provided and 3 places for accommodations.
+            The response should be in the following JSON structure:
 
-            # Ashiville, North Carolina
-            ## Estimated Drive Time: ~ 2 hours
-            ## Activities:
-            - **Mountain Biking:** details about the mountain biking
-            - **Hiking:** details about the hiking
-            - **Fly Fishing:** details about the fly fishing
-            ## Accommodations:
-            1. **Blackberry Farm:** details about the place
-               -**Address:** address of the place
-            2. **The Lodge at Buckberry Creek:** details about the place
-               -**Address:** address of the place
-            3. **Townsend Gateway Inn:** details about the place
-               -**Address:** address of the place
+                {
+                    'message': 'short summary of the recommendation(s)'
+                    'destinations': 
+                    [
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                             'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
+                       },
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                            'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
+                        },
+                    ]
+                }";
 
-            **Summary:** short summary of the recommendations";
-
-        private string _promptProvideRoutePlan = @"
+        private const string _promptProvideRoutePlan = @"
             Query: {{$startingpoint}}
             Duration: {{$duration}}
             Activities: {{$activities}}
-            Based on the starting details, provide recommendations for up to 5 destinations and 3 places for accommodations using the following format:
+            Based on the starting details, provide recommendations for up to 5 destinations and 3 places for accommodations.
+            The response should be in the following JSON structure:
 
-            # Ashiville, North Carolina
-            ## Estimated Drive Time: ~ 2 hours
-            ## Activities:
-            - **Mountain Biking:** details about the mountain biking
-            - **Hiking:** details about the hiking
-            - **Fly Fishing:** details about the fly fishing
-            ## Accommodations:
-            1. **Blackberry Farm:** details about the place
-               -**Address:** address of the place
-            2. **The Lodge at Buckberry Creek:** details about the place
-               -**Address:** address of the place
-            3. **Townsend Gateway Inn:** details about the place
-               -**Address:** address of the place
-
-            **Summary:** short summary of the recommendations";
+                {
+                    'message': 'short summary of the recommendation(s)'
+                    'destinations': 
+                    [
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                            'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
+                        },
+                        {
+                            'name': 'destination',
+                            'summary': 'short description of the suggested trip'
+                            'estimated_drive_time': 'approximate time to drive there',
+                            'activities': 
+                            [
+                                {
+                                    'title': 'activity 1',
+                                    'description': 'description of activity 1'
+                                },
+                                {
+                                    'title': 'activity 2',
+                                    'description': 'description of activity 2'
+                                },
+                                {
+                                    'title': 'activity 3',
+                                    'description': 'description of activity 3'
+                                },
+                            ],
+                            'accommodations': 
+                            [
+                                {
+                                    'title': 'accommodation 1',
+                                    'description': 'description of accommodation 1'
+                                },
+                                {
+                                    'title': 'accommodation 2',
+                                    'description': 'description of accommodation 2'
+                                },
+                                {
+                                    'title': 'accommodation 3',
+                                    'description': 'description of accommodation 3'
+                                },
+                            ],
+                        },
+                    ]
+                }";
 
         public async Task<string> CheckForDetailsAsync(Kernel kernel, string userid, string query)
-        {   
+        {
 #pragma warning disable SKEXP0013
 
             var executionSettings = new OpenAIPromptExecutionSettings()
             {
                 ResponseFormat = "json_object",
-                MaxTokens = 400, 
+                MaxTokens = 400,
             };
 
 
@@ -171,15 +431,15 @@ namespace api_chat.Util
                 Console.WriteLine("SK ,- CheckVerificationIntent");
                 var response = await kernel.InvokePromptAsync(_promptCheckForDetails, arguments);
                 // this code is here for debugging purposes
-                    var metadata = response.Metadata;
-                    Console.WriteLine($@"Starting details :{userid}");
-                    Console.WriteLine(response);
-                    Console.WriteLine("----------------------");
-                    if (metadata != null && metadata.ContainsKey("Usage"))
-                    {
-                        var usage = (CompletionsUsage?)metadata["Usage"];
-                        Console.WriteLine($"Token usage. Input tokens: {usage?.PromptTokens}; Output tokens: {usage?.CompletionTokens}");
-                    }
+                var metadata = response.Metadata;
+                Console.WriteLine($@"Starting details :{userid}");
+                Console.WriteLine(response);
+                Console.WriteLine("----------------------");
+                if (metadata != null && metadata.ContainsKey("Usage"))
+                {
+                    var usage = (CompletionsUsage?)metadata["Usage"];
+                    Console.WriteLine($"Token usage. Input tokens: {usage?.PromptTokens}; Output tokens: {usage?.CompletionTokens}");
+                }
                 // above code is not really needed
                 result = response.GetValue<string>() ?? "";
             }
@@ -190,16 +450,17 @@ namespace api_chat.Util
             return result ?? "";
         }
 
-        public async Task<string> ProvidRecommendationsAsync(Kernel kernel, string userid, string startingpoint, string duration, string activities, string intent = "suggestdestinations")
+        public async Task<string> ProvideRecommendationsAsync(Kernel kernel, string userid, string startingpoint, string duration, string activities, string destination = "", string intent = "suggestdestinations")
         {
 #pragma warning disable SKEXP0013
 
             var executionSettings = new OpenAIPromptExecutionSettings()
             {
+                ResponseFormat = "json_object", // setting JSON output mode
                 MaxTokens = 2000,
             };
 
-            KernelArguments arguments = new(executionSettings) { { "startingpoint", startingpoint }, { "duration", duration }, { "activities", activities } };
+            KernelArguments arguments = new(executionSettings) { { "startingpoint", startingpoint }, { "duration", duration }, { "activities", activities }, { "destination", destination } };
             string result = "";
             try
             {
@@ -209,7 +470,7 @@ namespace api_chat.Util
                 {
                     promptToUse = _promptProvideRecommendationsForKnownDestination;
                 }
-                Console.WriteLine("SK ,- ProvidRecommendationsAsync");
+                Console.WriteLine("SK ,- ProvideRecommendationsAsync");
                 var response = await kernel.InvokePromptAsync(promptToUse, arguments);
                 // this code is here for debugging purposes
                     var metadata = response.Metadata;

@@ -9,6 +9,7 @@
 @using ui_frontend.Models;
 
 @inject ChatService chatService
+@inject ProgressService progressService
 @inject IJSRuntime JSRuntime;
 @rendermode InteractiveServer
 
@@ -47,7 +48,7 @@
 
 </style>
 <MudStack>
-    <MudProgressLinear Color="Color.Primary" @ref="progressBar" Hidden="@(progressHidden)" Indeterminate="true" Class="my-7" />
+    <MudProgressLinear Color="Color.Primary" @ref="progressBar" Hidden="@(!progressService.ShowProgress)" Indeterminate="true" Class="my-7" />
     <MudPaper Elevation="12" Class="pa-4" >
         <MudStack Justify="Justify.FlexEnd" Spacing="4">
             <MudText Typo="Typo.h5">Results</MudText>
@@ -61,11 +62,11 @@
                         {
                             var chatQuestion = item.Question;
                             var aiResponse = item.Answer;
-                            var citations = item.Citations;
+                            var citations = item.Trips;
                             <UserQuestionComp StatusText="@chatQuestion" />
                             if (item.AnswerHidden == false)
                             {
-                                <AIResponseComp StatusText="@aiResponse" CitationList="@citations" />
+                                <AIResponseComp StatusText="@aiResponse" TripList="@citations" />
                             }
                         }
                     }
@@ -91,10 +92,10 @@
 @code {
     private bool progressHidden = true;
     private MudProgressLinear? progressBar;
-    string? value;
+    string? value = "Help me plan a trip to the beach from Gray, TN for 5 days.  I want to do some kite surfing.";
     private List<QuestionAnswer> qaList = new List<QuestionAnswer>();
     private SessionInfo sessionInfo = new SessionInfo();
-    private List<Citation> citationList = new List<Citation>();
+    private List<Trip> citationList = new List<Trip>();
 
     private bool _open = true;
 
@@ -117,32 +118,22 @@
         {
             try
             {
-                progressHidden = false;
-                var newCitationList = new List<Citation>();
+                progressService.ShowProgress = true;
+
+                var newCitationList = new List<Trip>();
                 var newQA = new QuestionAnswer(value, "");
                 qaList.Add(newQA);
                 int newIndex = qaList.IndexOf(newQA);
                 sessionInfo.SessionId = "12345";
-                sessionInfo.UserId = "steve@fence360.com";
+                sessionInfo.UserId = "user@contoso.com";
                 sessionInfo.Prompt = value;
                 qaList[newIndex].AnswerHidden = true;
                 var response = await chatService.GetAiResponseAsync(value, sessionInfo);
-                qaList[newIndex].Answer += response.Content;
+                qaList[newIndex].Answer += response.Message;
                 qaList[newIndex].AnswerHidden = false;
-                if (response.Citations != null)
+                if (response.Destinations != null)
                 {
-                    foreach (var citation in response.Citations)
-                    {
-                        //newCitationList.
-                        Citation newCitation = new Citation
-                            {
-                                Content = citation.Content,
-                                Title = citation.Title,
-                                FilePath = citation.FilePath
-                            };
-                        // qaList[newIndex].Citations.Add(citation);
-                        qaList[newIndex].AddCitation(newCitation);
-                    }
+                        qaList[newIndex].AddTrips(response.Destinations);
                 }
                 // need to add the logic for citations as well.
 
@@ -152,8 +143,8 @@
                 //     qaList[newIndex].Answer += line;
                 //     await InvokeAsync(() => StateHasChanged());
                 // }
-                progressHidden = true;
-                value = string.Empty;    
+                progressService.ShowProgress = false;
+                value = string.Empty;
             }
             catch (Exception ex)
             {
@@ -179,5 +170,21 @@
         // }
         await Task.Delay(1);
     }
+    protected override void OnInitialized()
+    {
+        progressService.Notify += OnNotify;
+    }
 
+    public void OnNotify()
+    {
+        InvokeAsync(() =>
+        {
+            StateHasChanged();
+        });
+    }
+
+    public void Dispose()
+    {
+        progressService.Notify -= OnNotify;
+    }
 }

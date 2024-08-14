@@ -1,5 +1,4 @@
-﻿
-@page "/chat"
+﻿@page "/chat"
 @using ui_frontend.Service;
 @inject ChatService chatService;
 
@@ -13,16 +12,17 @@
                         <MudImage Src="images/businessman-hand-touchsample.jpg"></MudImage>
                     </MudAvatar>
                     <MudStack Justify="Justify.Center" Spacing="0">
-                        <MudText Typo="Typo.body1">Fence360 AI Chat Bot</MudText>
+                        <MudText Typo="Typo.body1">Contoso Travel AI Chat Bot</MudText>
                         <MudText Typo="Typo.body2">Ask questions about the business and get answers</MudText>
                     </MudStack>
-                    <div style="margin-left:auto">
-                        <MudSelect Style="width: 300px;" Class="et-select-input align-right" T="string" @bind-Value="SelectedCategory" Label="Select Category" >
-                            <MudSelectItem Value="@("Administration")" />
-                            <MudSelectItem Value="@("Sales")" />
-                            <MudSelectItem Value="@("Field Tech")" />
-                        </MudSelect>
+                    @*                     <div style="margin-left:auto">
+                    <MudSelect Style="width: 300px;" Class="et-select-input align-right" T="string" @bind-Value="SelectedCategory" Label="Select Category" >
+                    <MudSelectItem Value="@("Administration")" />
+                    <MudSelectItem Value="@("Sales")" />
+                    <MudSelectItem Value="@("Field Tech")" />
+                    </MudSelect>
                     </div>
+                    *@
                 </MudStack>
             </MudPaper>
         </MudItem>

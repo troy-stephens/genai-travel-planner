@@ -57,7 +57,7 @@ namespace api_chat.Functions
             else if (_userSession != null)
             {
                 
-                // We could also load the userId and sesson details from backend by looking up these details from the backend.
+                // We could also load the userId and session details from backend by looking up these details from the backend.
                 // basically retreiving the chatHistory (memory for the user and session) 
                 _userSession.UserID = chatRequest.userId;
                 _userSession.SessionID = chatRequest.sessionId;
@@ -66,20 +66,20 @@ namespace api_chat.Functions
             var intent = await Util.Intent.GetIntent(_chat, chatRequest.prompt);
             // The purpose of using an Intent pattern is to allow you to make decisions about how you want to invoke the LLM
             // In the case of RAG, if you can detect the user intent is to related to searching documents, then you can only perform that action when the intent is to search documents
-            // this allows you to reduce the token useage and save you TPM and dollars
+            // this allows you to reduce the token usage and save you TPM and dollars
+            SuggestDestinations suggestDestinations = new SuggestDestinations();
+            var checkfordetailsresult = await suggestDestinations.CheckForDetailsAsync(_kernel, chatRequest.userId, chatRequest.prompt);
+            CheckForDetails? checkfordetails = JsonSerializer.Deserialize<CheckForDetails>(checkfordetailsresult);
+
             switch (intent.ToLower())
             {
                 case "suggestdestinations":
                     {
                         Console.WriteLine("Intent: SuggestDestinations");
-                        SuggestDestinations suggestDestinations = new SuggestDestinations();
-                        // make up a personid
-                        var checkfordetailsresult = await suggestDestinations.CheckForDetailsAsync(_kernel, chatRequest.userId, chatRequest.prompt);
-                        CheckForDetails? checkfordetails = JsonSerializer.Deserialize<CheckForDetails>(checkfordetailsresult);
                         if (checkfordetails != null && checkfordetails.DetailsProvided)
                         {
                             // we have the details so not we can get suggestions
-                            var destinationRecommendations = await suggestDestinations.ProvidRecommendationsAsync(_kernel, _userSession.UserID, checkfordetails.StartingPoint, checkfordetails.Duration, checkfordetails.Activities);
+                            var destinationRecommendations = await suggestDestinations.ProvideRecommendationsAsync(_kernel, _userSession.UserID, checkfordetails.StartingPoint, checkfordetails.Duration, checkfordetails.Activities);
                             var userMessage = $@"Starting at: {checkfordetails.StartingPoint}, make suggestions for a {checkfordetails.Duration} trip, and the activities we interested in are: {checkfordetails.Activities}";
                             _chatHistory.AddUserMessage(userMessage);
                             _chatHistory.AddAssistantMessage(destinationRecommendations);
@@ -142,13 +142,10 @@ namespace api_chat.Functions
                 case "knowndestination":
                     {
                         Console.WriteLine("Intent: KnownDestination");
-                        SuggestDestinations suggestDestinations = new SuggestDestinations();
-                        var checkfordetailsresult = await suggestDestinations.CheckForDetailsAsync(_kernel, chatRequest.userId, chatRequest.prompt);
-                        CheckForDetails? checkfordetails = JsonSerializer.Deserialize<CheckForDetails>(checkfordetailsresult);
                         if (checkfordetails != null && checkfordetails.DetailsProvided)
                         {
                             // we have the details so not we can get suggestions
-                            var destinationRecommendations = await suggestDestinations.ProvidRecommendationsAsync(_kernel, chatRequest.userId, checkfordetails.StartingPoint, checkfordetails.Duration, checkfordetails.Activities, "knowndestination");
+                            var destinationRecommendations = await suggestDestinations.ProvideRecommendationsAsync(_kernel, chatRequest.userId, checkfordetails.StartingPoint, checkfordetails.Duration, checkfordetails.Activities, "knowndestination");
                             var userMessage = $@"Starting at: {checkfordetails.StartingPoint}, make suggestions for a {checkfordetails.Duration} trip, and the activities we interested in are: {checkfordetails.Activities}";
                             _chatHistory.AddUserMessage(userMessage);
                             _chatHistory.AddAssistantMessage(destinationRecommendations);
@@ -207,7 +204,7 @@ namespace api_chat.Functions
                 case "unknown":
                     {
                         Console.WriteLine("Intent: Unknown");
-                        _chatHistory.AddUserMessage("Simply reponse in a polite way that the request is not related to travel so you are unable to help.");
+                        _chatHistory.AddUserMessage("Simply respond in a polite way that the request is not related to travel so you are unable to help.");
                         result = Constants.ICanHelpWith;
                         break;
                     }

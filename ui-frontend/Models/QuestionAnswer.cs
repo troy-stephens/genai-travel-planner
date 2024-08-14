@@ -7,15 +7,15 @@
 
         public bool? AnswerHidden { get; set; }
 
-        public List<Citation> Citations
+        public List<Trip> Trips
         {
             get
             {
-                return _citations;
+                return _trips;
             }
         }
 
-        private List<Citation> _citations { get; set; } = new List<Citation>();
+        private List<Trip> _trips { get; set; } = new List<Trip>();
 
         public QuestionAnswer(string question, string answer)
         {
@@ -23,6 +23,8 @@
             Answer = answer;
         }
 
-        public void AddCitation(Citation citation) => _citations.Add(citation);
+        public void AddTrip(Trip trip) => _trips.Add(trip);
+        public void AddTrips(List<Trip> trips) => _trips.AddRange(trips);
+
     }
 }
