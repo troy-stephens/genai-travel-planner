@@ -58,7 +58,8 @@ namespace api_chat.Util
                     'destinations': 
                     [
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -78,7 +79,8 @@ namespace api_chat.Util
                             ],
                         },
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -109,7 +111,8 @@ namespace api_chat.Util
                     'destinations': 
                     [
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -129,7 +132,8 @@ namespace api_chat.Util
                             ],
                         },
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -171,7 +175,8 @@ namespace api_chat.Util
                     'destinations': 
                     [
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -207,7 +212,8 @@ namespace api_chat.Util
 
                         },
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -258,7 +264,8 @@ namespace api_chat.Util
                     'destinations': 
                     [
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -293,7 +300,8 @@ namespace api_chat.Util
                             ],
                        },
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -342,7 +350,8 @@ namespace api_chat.Util
                     'destinations': 
                     [
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 
@@ -377,7 +386,8 @@ namespace api_chat.Util
                             ],
                         },
                         {
-                            'name': 'destination',
+                            'destination': 'destination',
+                            'starting_point': 'starting point',
                             'summary': 'short description of the suggested trip'
                             'estimated_drive_time': 'approximate time to drive there',
                             'activities': 

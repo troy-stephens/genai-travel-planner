@@ -21,7 +21,9 @@ namespace ui_frontend.Models
     }
     public class Trip
     {
-        public string? Name { get; set; }
+        public string? Destination { get; set; }
+        [JsonPropertyName("starting_point")]
+        public string? StartingPoint { get; set; }
         public string? Summary { get; set; }
         [JsonPropertyName("estimated_drive_time")]
         public string? EstimatedDriveTime { get; set; }

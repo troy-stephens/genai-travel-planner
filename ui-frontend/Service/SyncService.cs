@@ -26,6 +26,7 @@ namespace ui_frontend.Service
         {
             var client = _httpClientFactory.CreateClient("SyncAPI");
             var response = await client.PostAsJsonAsync("travel-data", trip);
+            Console.WriteLine(response.Content.ToString());
             return response.IsSuccessStatusCode;
         }
     }

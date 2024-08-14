@@ -45,6 +45,7 @@ namespace ui_frontend.Service
             {
                 chatResponse = new TourGuideResponse { Message = responseBody };
             }
+            Console.WriteLine(responseBody);
 
             return chatResponse;
         }
