@@ -15,6 +15,9 @@ using Microsoft.SemanticKernel.ChatCompletion;
 string _apiDeploymentName = Helper.GetEnvironmentVariable("ApiDeploymentName");
 string _apiEndpoint = Helper.GetEnvironmentVariable("ApiEndpoint");
 string _apiKey = Helper.GetEnvironmentVariable("ApiKey");
+//string _apiAISearchEndpoint = Helper.GetEnvironmentVariable("AISearchURL");
+//string _apiAISearchKey = Helper.GetEnvironmentVariable("AISearchKey");
+//string _textEmbeddingName = Helper.GetEnvironmentVariable("EmbeddingName");
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
@@ -32,24 +35,6 @@ var host = new HostBuilder()
                 _apiKey
                 );
             
-            // We are not using the AzureAISearchPlugin Search so I am commenting this out
-            //builder.Services.AddSingleton<SearchIndexClient>(s =>
-            //{
-            //    string endpoint = _apiAISearchEndpoint;
-            //    string apiKey = _apiAISearchKey;
-            //    return new SearchIndexClient(new Uri(endpoint), new Azure.AzureKeyCredential(apiKey));
-            //});
-
-            // Add Singleton for AzureAISearch 
-            //builder.Services.AddSingleton<IAzureAISearchService, AzureAISearchService>();
-
-            //#pragma warning disable SKEXP0011 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-            //builder.AddAzureOpenAITextEmbeddingGeneration(_textEmbeddingName, _apiEndpoint, _apiKey);
-            //#pragma warning restore SKEXP0011 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-
-            // builder.Plugins.AddFromType<DBQueryPlugin>();  
-            // builder.Plugins.AddFromType<UniswapV3SubgraphPlugin>();
-            // builder.Plugins.AddFromType<AzureAISearchPlugin>();
 
             return builder.Build();
         });

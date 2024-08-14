@@ -20,6 +20,7 @@ namespace api_chat.Util
         {
            'detailsProvided' : true,
            'startingPoint' : '<The city or address the user is starting from.>',
+           'destination' : '<The destination or location user is traveling to.>,
            'duration' : '<The duration of the trip in days, weeks or months>',
            'activities' : '<The activities the user is interested in>
         }";
@@ -247,6 +248,7 @@ namespace api_chat.Util
             Starting Point: {{$startingpoint}}
             Destination: {{$destination}}
             Duration: {{$duration}}
+            Destination: {{$destination}}
             Activities: {{$activities}}
             Based on the starting details, provide recommendations for the destination provided and 3 places for accommodations.
             The response should be in the following JSON structure:
