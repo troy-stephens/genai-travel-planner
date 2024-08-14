@@ -15,9 +15,6 @@ using Microsoft.SemanticKernel.ChatCompletion;
 string _apiDeploymentName = Helper.GetEnvironmentVariable("ApiDeploymentName");
 string _apiEndpoint = Helper.GetEnvironmentVariable("ApiEndpoint");
 string _apiKey = Helper.GetEnvironmentVariable("ApiKey");
-//string _apiAISearchEndpoint = Helper.GetEnvironmentVariable("AISearchURL");
-//string _apiAISearchKey = Helper.GetEnvironmentVariable("AISearchKey");
-//string _textEmbeddingName = Helper.GetEnvironmentVariable("EmbeddingName");
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()

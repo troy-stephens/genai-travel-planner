@@ -183,47 +183,21 @@ namespace api_chat.Functions
                 case "routeplan":
                     {
                         Console.WriteLine("Intent: routeplan");
-                        // make up a personid
-                        SuggestDestinations suggestDestinations = new SuggestDestinations();
-                        var checkfordetailsresult = await suggestDestinations.CheckForDetailsAsync(_kernel, chatRequest.userId, chatRequest.prompt);
-                        CheckForDetails? checkfordetails = JsonSerializer.Deserialize<CheckForDetails>(checkfordetailsresult);
-                        if (checkfordetails != null && checkfordetails.DetailsProvided)
+                        if (!_userSession.StartingDetailsProvided)
                         {
-                            // we have the details so now we can get suggestions
-                            var destinationRecommendations = await suggestDestinations.ProvidRecommendationsAsync(_kernel, _userSession.UserID, checkfordetails.StartingPoint, checkfordetails.Duration, checkfordetails.Activities);
-                            var userMessage = $@"Starting at: {checkfordetails.StartingPoint}, make suggestions for a {checkfordetails.Duration} trip, and the activities we interested in are: {checkfordetails.Activities}";
-                            _chatHistory.AddUserMessage(userMessage);
-                            _chatHistory.AddAssistantMessage(destinationRecommendations);
-                            result = destinationRecommendations;
-                            _userSession.StartingDetailsProvided = true;
-                            // return the response
+                            result = Constants.AskForStartingDetails;
                         }
                         else
                         {
-                            // starting point, duration and activities not provided need to ask the user to provide those details.
-                            result = Constants.AskForStartingDetails;
+                            // We are going to let the LLM generate the RoutePlan, no need for a special prompt here unless we what specific formatting, then we can use the approach we used above
+                            _chatHistory.AddUserMessage(chatRequest.prompt);
+                            var resultChatCompletion = await _chat.GetChatMessageContentAsync(
+                                _chatHistory,
+                                executionSettings: new OpenAIPromptExecutionSettings { Temperature = 0.7, TopP = 0.0 },
+                                kernel: _kernel);
+                            _chatHistory.AddAssistantMessage(resultChatCompletion?.Content ?? "");
+                            result = resultChatCompletion?.Content ?? "";
                         }
-
-                        //break;
-
-
-
-
-                        //if (!_userSession.StartingDetailsProvided)
-                        //{
-                        //    result = Constants.AskForStartingDetails;
-                        //}
-                        //else
-                        //{
-                        //    // We are going to let the LLM generate the RoutePlan, no need for a special prompt here unless we what specific formatting, then we can use the approach we used above
-                        //    _chatHistory.AddUserMessage(chatRequest.prompt);
-                        //    var resultChatCompletion = await _chat.GetChatMessageContentAsync(
-                        //        _chatHistory,
-                        //        executionSettings: new OpenAIPromptExecutionSettings { Temperature = 0.7, TopP = 0.0 },
-                        //        kernel: _kernel);
-                        //    _chatHistory.AddAssistantMessage(resultChatCompletion?.Content ?? "");
-                        //    result = resultChatCompletion?.Content ?? "";
-                        //}
 
                         break;
                     }
